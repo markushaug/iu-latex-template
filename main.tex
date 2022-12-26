@@ -49,6 +49,13 @@
  \clearpage{\pagestyle{empty}\cleardoublepage}
 }
 
+% https://stackoverflow.com/questions/28572590/latex-retake-page-numbering
+\ExplSyntaxOn% http://tex.stackexchange.com/a/227859/5764
+\DeclareExpandableDocumentCommand{\arabicnumeral}{m}
+  {
+  \int_from_roman:n { #1 }
+  }
+\ExplSyntaxOff
 
 %% ++++++++++++++++++++++++++++++++++++++++++
 %% Dokument
@@ -76,7 +83,7 @@
 \begin{acronym}
 \acro{lcnc}[LCNC]{Low-Code/No-Code}
 \end{acronym}
-\blankpage
+\label{last-roman-page}% Save last page of this chapter
 
 %% ++++++++++++++++++++++++++++++++++++++++++
 %% Hauptteil
@@ -96,9 +103,12 @@
 %% Literatur
 %% ++++++++++++++++++++++++++++++++++++++++++
 \blankpage
-\pagenumbering{Roman}
 
-test
+%% Continue page numbering from last roman page
+\renewcommand{\thepage}{\roman{page}}% Switch to roman numbering
+\edef\intpagevalue{\getpagerefnumber{last-roman-page}}% Retrieve last roman page & convert to arabic
+\setcounter{page}{\number\numexpr\expandafter\arabicnumeral\expandafter{\intpagevalue}+1}% Set current page value
+\renewcommand{\thepage}{\Roman{page}}% Switch back to arabic numbering
 
 \phantomsection
 % set bibliography name
@@ -117,7 +127,7 @@ test
 \blankpage
 \pagenumbering{arabic}
 \appendix
-%\include{pages/anhang} % Anhang
+\include{pages/appendix} % Anhang
 
 \end{document}
 
