@@ -1,0 +1,50 @@
+%% Titelseite
+\def\usesf{}
+\let\usesf\sffamily % diese Zeile auskommentieren für normalen TeX Font
+
+\newsavebox{\Tutorin}
+\savebox{\Tutorin}{\usesf Alexandra M. Araiza Maucher}
+
+
+\setlength{\unitlength}{1pt}
+
+%\vspace*{-39pt}\hspace*{300pt}\includegraphics[width=.27\paperwidth]{logos/IOSB}
+%\vspace{20}\hspace*{300}\includegraphics[width=.21\paperwidth]{logos/IU.png}
+
+% include logo at top right
+
+
+\thispagestyle{empty}
+
+\begin{titlepage}
+%%\let\footnotesize\small \let\footnoterule\relax
+\begin{center}
+\hbox{}
+\vfill
+{\usesf}
+{\huge\bfseries Meine Fallstudie \par}
+\vskip 1.8cm
+Fallstudie\\[2mm]
+\vskip 1cm
+
+{\large\bfseries Markus Haug (92102554)\\}
+\vskip 1.2cm
+Wirtschaftsinformatik (B.Sc.)\\
+% im Modul\\
+DLBIHK01 - Interkulturelle und ethische Handlungskompetenzen\\
+24.12.2022
+\vskip 3cm
+\begin{tabular}{p{3cm}l}
+Tutorin: & \usebox{\Tutorin} \\
+\end{tabular}
+\vfill
+\end{center}
+
+\end{titlepage}
+%% Titelseite Ende
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "thesis"
+%%% End: 

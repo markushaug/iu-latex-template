@@ -1,0 +1,8 @@
+# add latex tmp files
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.bcf
+*.gz
+**/dir

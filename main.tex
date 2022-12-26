@@ -1,0 +1,114 @@
+\documentclass{article}[11pt, a4paper, oneside]
+
+% neue deutsche Trennungsregeln, etc
+\usepackage[ngerman]{babel}
+\usepackage[hidelinks]{hyperref} % Hyperlinks
+\usepackage{setspace}	% \onehalfspaceing
+% Seitenränder
+\usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+% 1,5 Zeilenabstand
+\onehalfspacing
+\usepackage{lipsum} 
+% define size for section headings
+\usepackage{titlesec}
+
+% Abkürzungen
+\usepackage[nohyperlinks, printonlyused]{acronym}
+
+\titleformat{\section}{\normalfont\fontsize{12pt}{1.5}\bfseries}{\thesection}{1em}{}
+
+% Font Arial
+\usepackage{fontspec}
+\setmainfont{Arial}
+  
+% automatischens Einrücken verhindern
+\usepackage{changepage}
+\setlength{\parindent}{0pt}
+% 6pt Abstand nur zwischen Absätzen
+\setlength{\parskip}{6pt}{}
+
+% Grafiken einbinden
+\usepackage{graphicx}       
+\usepackage[utf8]{inputenc} % korrekte Darstellung von Umlauten
+
+\def\UrlFont{\rm} % Print URLs not in Typewriter Font
+
+%% Informationen für die PDF-Datei
+\hypersetup{
+ pdfauthor={Markus Haug},
+ pdftitle={Meine Fallstudie}
+ pdfsubject={Not set},
+ pdfkeywords={Not set}
+}
+
+\usepackage{csquotes}
+\usepackage[style=apa]{biblatex}
+\addbibresource{references.bib}
+
+
+\newcommand{\blankpage}{% Leerseite ohne Seitennummer, nächste Seite rechts
+ \clearpage{\pagestyle{empty}\cleardoublepage}
+}
+
+\begin{document}
+\include{pages/cover} % Titelblatt
+\blankpage
+
+% \begin{spacing}{1.5}
+\pagenumbering{roman}
+
+%% ++++++++++++++++++++++++++++++++++++++++++
+%% Verzeichnisse
+%% ++++++++++++++++++++++++++++++++++++++++++
+\tableofcontents % Inhaltsverzeichnis
+\blankpage
+\listoffigures % Abbildungsverzeichnis
+\addcontentsline{toc}{chapter}{\listfigurename}
+\blankpage
+\listoftables % Tabellenverzeichnis
+
+\blankpage
+\section*{Abkürzungsverzeichnis}
+
+\begin{acronym}
+\acro{lcnc}[LCNC]{Low-Code/No-Code}
+\end{acronym}
+\blankpage
+
+%% ++++++++++++++++++++++++++++++++++++++++++
+%% Hauptteil
+%% ++++++++++++++++++++++++++++++++++++++++++
+\pagenumbering{arabic}
+\include{chapters/einleitung} % Einleitung
+%\include{chapters/grundlagen}  % Grundlagen
+%\include{chapters/analyse}     % Analyse
+%\include{chapters/entwurf}     % Entwurf
+%\include{chapters/implementierung}    % Implementierung
+%\include{chapters/evaluation}        % Evaluierung
+%\include{chapters/zusammenfassung}   % Zusammenfassung und Ausblick
+
+% \end{spacing}
+
+%% ++++++++++++++++++++++++++++++++++++++++++
+%% Literatur
+%% ++++++++++++++++++++++++++++++++++++++++++
+\cleardoublepage
+\phantomsection
+% set bibliography name
+\renewcommand{\bibname}{Literaturverzeichnis}
+\addcontentsline{toc}{chapter}{\bibname}
+% \nocite{*} % nur angeben, wenn auch nicht im Text zitierte Quellen 
+
+\begin{flushleft}
+% print bibliography
+\printbibliography[title=\bibname]
+\end{flushleft}
+
+%% ++++++++++++++++++++++++++++++++++++++++++
+%% Anhang
+%% ++++++++++++++++++++++++++++++++++++++++++
+\appendix
+%\include{pages/anhang} % Anhang
+
+\end{document}
+
