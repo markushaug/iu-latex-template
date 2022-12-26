@@ -98,6 +98,7 @@
 %\include{chapters/evaluation}        % Evaluierung
 %\include{chapters/zusammenfassung}   % Zusammenfassung und Ausblick
 
+\label{last-arabic-page}% Save last page of this chapter
 
 %% ++++++++++++++++++++++++++++++++++++++++++
 %% Literatur
@@ -125,9 +126,15 @@
 %% Anhang
 %% ++++++++++++++++++++++++++++++++++++++++++
 \blankpage
-\pagenumbering{arabic}
+
+%% Continue page numbering from last arabic page
+\renewcommand{\thepage}{\arabic{page}}% Switch to roman numbering
+\edef\intpagevalue{\getpagerefnumber{last-arabic-page}}% Retrieve last roman page & convert to arabic
+\setcounter{page}{\number\numexpr\expandafter\arabicnumeral\expandafter{\intpagevalue}+1}% Set current page value
+\renewcommand{\thepage}{\arabic{page}}% Switch back to arabic numbering
+
 \appendix
-\include{pages/appendix} % Anhang
+%\include{pages/appendix} % Anhang
 
 \end{document}
 
