@@ -1,27 +1,23 @@
 \documentclass{article}[11pt, a4paper, oneside]
 
-% neue deutsche Trennungsregeln, etc
-\usepackage[ngerman]{babel}
-\usepackage[hidelinks]{hyperref} % Hyperlinks
-\usepackage{setspace}	% \onehalfspaceing
-% Seitenränder
-\usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
-% 1,5 Zeilenabstand
-\onehalfspacing
-\usepackage{lipsum} 
-% define size for section headings
-\usepackage{titlesec}
+\usepackage[ngerman]{babel} % neue deutsche Trennungsregeln, etc
+\usepackage[hidelinks]{hyperref} % Hyperlinks ohne Umrandungen
+\usepackage{setspace} % Abstände zwischen Absätzen
+\usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry} % Seitenränder
+\onehalfspacing % 1,5 Zeilenabstand
+\usepackage{lipsum}  % Dummy-Texte
+\usepackage{titlesec} % define size for section headings
+\usepackage[nohyperlinks, printonlyused]{acronym} % Abkürzungen
 
-% Abkürzungen
-\usepackage[nohyperlinks, printonlyused]{acronym}
 
-\titleformat{\section}{\normalfont\fontsize{12pt}{1.5}\bfseries}{\thesection}{1em}{}
-
-% Font Arial
+%% 
+%% Schriftarten und -größen
+%%
+\titleformat{\section}{\normalfont\fontsize{12pt}{1.5}\bfseries}{\thesection}{1em}{} % Überschriften
 \usepackage{fontspec}
 \setmainfont{Arial}
   
-% automatischens Einrücken verhindern
+% automatischens Einrücken von Absätzen verhindern
 \usepackage{changepage}
 \setlength{\parindent}{0pt}
 % 6pt Abstand nur zwischen Absätzen
@@ -41,6 +37,9 @@
  pdfkeywords={Not set}
 }
 
+%%
+%% Bibliographie
+%%
 \usepackage{csquotes}
 \usepackage[style=apa]{biblatex}
 \addbibresource{references.bib}
@@ -50,25 +49,29 @@
  \clearpage{\pagestyle{empty}\cleardoublepage}
 }
 
+
+%% ++++++++++++++++++++++++++++++++++++++++++
+%% Dokument
+%% ++++++++++++++++++++++++++++++++++++++++++
 \begin{document}
+\pagenumbering{Roman} % Uppercase Roman numerals
 \include{pages/cover} % Titelblatt
 \blankpage
-
-% \begin{spacing}{1.5}
-\pagenumbering{roman}
 
 %% ++++++++++++++++++++++++++++++++++++++++++
 %% Verzeichnisse
 %% ++++++++++++++++++++++++++++++++++++++++++
+\setcounter{tocdepth}{3}
 \tableofcontents % Inhaltsverzeichnis
 \blankpage
 \listoffigures % Abbildungsverzeichnis
-\addcontentsline{toc}{chapter}{\listfigurename}
+\addcontentsline{toc}{section}{Abbildungsverzeichnis}
 \blankpage
 \listoftables % Tabellenverzeichnis
-
+\addcontentsline{toc}{section}{Tabellenverzeichnis}
 \blankpage
 \section*{Abkürzungsverzeichnis}
+\addcontentsline{toc}{section}{Abkürzungsverzeichnis}
 
 \begin{acronym}
 \acro{lcnc}[LCNC]{Low-Code/No-Code}
@@ -78,25 +81,29 @@
 %% ++++++++++++++++++++++++++++++++++++++++++
 %% Hauptteil
 %% ++++++++++++++++++++++++++++++++++++++++++
+\blankpage
 \pagenumbering{arabic}
 \include{chapters/einleitung} % Einleitung
-%\include{chapters/grundlagen}  % Grundlagen
+\include{chapters/hauptteil}  % Grundlagen
 %\include{chapters/analyse}     % Analyse
 %\include{chapters/entwurf}     % Entwurf
 %\include{chapters/implementierung}    % Implementierung
 %\include{chapters/evaluation}        % Evaluierung
 %\include{chapters/zusammenfassung}   % Zusammenfassung und Ausblick
 
-% \end{spacing}
 
 %% ++++++++++++++++++++++++++++++++++++++++++
 %% Literatur
 %% ++++++++++++++++++++++++++++++++++++++++++
-\cleardoublepage
+\blankpage
+\pagenumbering{Roman}
+
+test
+
 \phantomsection
 % set bibliography name
 \renewcommand{\bibname}{Literaturverzeichnis}
-\addcontentsline{toc}{chapter}{\bibname}
+\addcontentsline{toc}{section}{\bibname}
 % \nocite{*} % nur angeben, wenn auch nicht im Text zitierte Quellen 
 
 \begin{flushleft}
@@ -107,6 +114,8 @@
 %% ++++++++++++++++++++++++++++++++++++++++++
 %% Anhang
 %% ++++++++++++++++++++++++++++++++++++++++++
+\blankpage
+\pagenumbering{arabic}
 \appendix
 %\include{pages/anhang} % Anhang
 

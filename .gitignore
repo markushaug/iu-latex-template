@@ -6,3 +6,7 @@
 *.bcf
 *.gz
 **/dir
+**.out
+**.log
+**.toc
+**.xml
