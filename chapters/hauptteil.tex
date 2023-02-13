@@ -1,3 +1,27 @@
 \section{Hauptteil}
 
-\lipsum[1-5]
+\lipsum[1]
+
+\subsection{Titel 1}
+
+Erstes Zitat ist normal mit \parencite[12]{sigfridsson}, das zweite mit "ebenda (ebd.") 
+\parencite[78-79]{sigfridsson}, aber nach einer neuen Quelle \parencite[30]{geer} ist es wieder normal \parencite[20]{sigfridsson}.
+
+Dieser Absatz nutzt wieder eine neue Quelle \parencite{nussbaum}.
+
+First citation should be normal \parencite[11]{sigfridsson}, second time with ibidem
+\parencite[95]{sigfridsson}, but after a second citation \parencite[282]{geer} it should appear as usual \parencite[2]{sigfridsson}.
+
+\subsection{Titel 2}
+
+Im Abbildung \ref*{fig:logo_iu} in Abschnitt \ref*{pos:logo_iu} wird das Logo der \ac{iu} dargestellt:
+
+\begin{figure}[ht!]
+    \label{pos:logo_iu}
+    \includegraphics[scale=0.35]{logos/IU.png}
+    \caption[Logo der \acs{iu}]{Logo der \ac{iu}}{Quelle: https://iu.de}
+    \label{fig:logo_iu}
+\end{figure}
+
+
+\lipsum[7-8]

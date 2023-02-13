@@ -1,5 +1,13 @@
-\documentclass{article}[11pt, a4paper, oneside]
+% Template created by Markus Haug <mh@haugmarkus.com>
+% Credits: Markus Haug and the template contributors.
+% Feel free to share and modify this template, but please give credit where it's due.
 
+\documentclass{article}[11pt, a4paper, oneside, ngerman]
+
+
+%% 
+%% Pakete & Formalia
+%%
 \usepackage[ngerman]{babel} % neue deutsche Trennungsregeln, etc
 \usepackage[hidelinks]{hyperref} % Hyperlinks ohne Umrandungen
 \usepackage{setspace} % Abstände zwischen Absätzen
@@ -8,60 +16,161 @@
 \usepackage{lipsum}  % Dummy-Texte
 \usepackage{titlesec} % define size for section headings
 \usepackage[nohyperlinks, printonlyused]{acronym} % Abkürzungen
+\usepackage[utf8]{inputenc} % korrekte Darstellung von Umlauten
+\usepackage[T1]{fontenc} % enable hyphenation for languages with accented characters
 
-
-%% 
 %% Schriftarten und -größen
-%%
-\titleformat{\section}{\normalfont\fontsize{12pt}{1.5}\bfseries}{\thesection}{1em}{} % Überschriften
 \usepackage{fontspec}
-\setmainfont{Arial}
-  
+\setmainfont{Arial} % Hauptfont Arial (lualatex oder xelatex benötigt)
+\titleformat{\section}{\normalfont\fontsize{12pt}{1.5}\bfseries}{\thesection}{1em}{} % Überschriften 1pt größer
+\titleformat{\subsection}{\normalfont\fontsize{12pt}{1.5}\bfseries}{\thesubsection}{1em}{} % Überschriften 1pt größer
+\titleformat{\subsubsection}{\normalfont\fontsize{12pt}{1.5}\bfseries}{\thesubsubsection}{1em}{} % Überschriften 1pt größer
+\def\UrlFont{\rm} % Print URLs not in Typewriter Font
+\renewcommand{\footnotesize}{\fontsize{10pt}{1.5pt}\selectfont}
+
 % automatischens Einrücken von Absätzen verhindern
 \usepackage{changepage}
 \setlength{\parindent}{0pt}
 % 6pt Abstand nur zwischen Absätzen
 \setlength{\parskip}{6pt}{}
 
-% Grafiken einbinden
-\usepackage{graphicx}       
-\usepackage[utf8]{inputenc} % korrekte Darstellung von Umlauten
-
-\def\UrlFont{\rm} % Print URLs not in Typewriter Font
-
-%% Informationen für die PDF-Datei
-\hypersetup{
- pdfauthor={Markus Haug},
- pdftitle={Meine Fallstudie}
- pdfsubject={Not set},
- pdfkeywords={Not set}
-}
-
-%%
-%% Bibliographie
-%%
-\usepackage{csquotes}
-\usepackage[style=apa]{biblatex}
-\addbibresource{references.bib}
-
-
-\newcommand{\blankpage}{% Leerseite ohne Seitennummer, nächste Seite rechts
+% Leerseite ohne Seitennummer, nächste Seite rechts
+\newcommand{\blankpage}{
  \clearpage{\pagestyle{empty}\cleardoublepage}
 }
 
-% https://stackoverflow.com/questions/28572590/latex-retake-page-numbering
-\ExplSyntaxOn% http://tex.stackexchange.com/a/227859/5764
-\DeclareExpandableDocumentCommand{\arabicnumeral}{m}
-  {
-  \int_from_roman:n { #1 }
-  }
-\ExplSyntaxOff
+% Grafiken einbinden
+\usepackage{graphicx}      
+% center images and tables 
+\makeatletter
+\g@addto@macro\@floatboxreset\centering
+\makeatother
+
+
+%% Informationen für die PDF-Datei
+% TODO: Update this!
+\hypersetup{
+ pdfauthor={Markus Haug},
+ pdftitle={Mein Titel}, %% Titel der PDF-Datei
+  pdfsubject={Fallstudie},
+ pdfkeywords={},
+ pdfcreator={lualatex},
+ pdfproducer={lualatex},
+}
+
+%%
+%% Bibliographie & Sondereinstellungen
+%%
+\usepackage[autostyle]{csquotes}
+\usepackage[backend=biber, style=apa, pagetracker, ibidtracker=constrict]{biblatex}
+
+% Remove Comma after second to last author and ampersand
+% https://tex.stackexchange.com/questions/670888/biblatex-apa-7-modification
+\makeatletter
+\renewcommand*{\apablx@ifrevnameappcomma}{\@secondoftwo}
+\makeatother
+
+\DefineBibliographyExtras{ngerman}{%
+  \renewcommand*{\finalandcomma}{}%
+}
+
+%% Verwendung von "ebenda (ebd.)", wenn eine Quelle hintereinander zitiert wird. 
+%% Dies ist nicht im Standard von APA definiert und muss somit explizit aktiviert werden.
+%% https://tex.stackexchange.com/questions/449249/getting-ibid-for-apa-style-citations-from-biblatex
+
+\makeatletter
+\providecommand*{\mkibid}[1]{#1}
+
+\newbibmacro*{cite:ibid}{%
+  \printtext[bibhyperref]{\bibstring[\mkibid]{ibidem}}}
+
+\renewbibmacro*{cite}{%
+  \ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
+    {\usebibmacro{cite:ibid}}
+    {\iffieldequals{fullhash}{\cbx@lasthash}
+     % Multiple cites in one command
+      {\setunit{\compcitedelim}%
+       \usebibmacro{cite:plabelyear+extradate}}%
+     % Single cite
+      {\ifthenelse{\ifnameundef{labelname}\OR\iffieldequalstr{entrytype}{patent}}
+     % No author/editor
+         {\usebibmacro{cite:noname}%
+          \setunit{\printdelim{nameyeardelim}}%
+          \usebibmacro{cite:plabelyear+extradate}%
+          \savefield{fullhash}{\cbx@lasthash}}
+     % Normal cite
+        {\ifnameundef{shortauthor}
+           {\printnames[labelname][-\value{listtotal}]{labelname}}%
+           {\cbx@apa@ifnamesaved
+             {\printnames{shortauthor}}
+             {\printnames[labelname][-\value{listtotal}]{author}%
+              \addspace\printnames[sabrackets]{shortauthor}}}%
+         \setunit{\printdelim{nameyeardelim}}%
+         \usebibmacro{cite:plabelyear+extradate}%
+         \savefield{fullhash}{\cbx@lasthash}}}}%
+   \setunit{\multicitedelim}}
+
+\renewbibmacro*{textcite}{%
+  \iffieldequals{fullhash}{\cbx@lasthash}
+   % Compact cite - more than one thing for same author
+    {\setunit{\compcitedelim}%
+     \usebibmacro{cite:plabelyear+extradate}}
+   % New cite
+    {%
+    \ifbool{cbx:parens}
+      {\bibcloseparen\global\boolfalse{cbx:parens}}
+      {}%
+      \setunit{\compcitedelim}%
+      \ifthenelse{\ifnameundef{labelname}\OR\iffieldequalstr{entrytype}{patent}}
+    % No author/editor or patent
+       {\iffieldundef{shorthand}%
+    % Cite using title
+         {\usebibmacro{cite:noname}%
+          \setunit{\ifbool{cbx:np}%
+                   {\printdelim{nameyeardelim}}%
+                   {\global\booltrue{cbx:parens}\addspace\bibopenparen}}%
+          \usebibmacro{cite:plabelyear+extradate}}
+    % Cite using shorthand
+         {\usebibmacro{cite:shorthand}}}
+    % Normal cite with author/editor
+    % Normal full cite
+       {\ifnameundef{shortauthor}%
+    % Normal full cite
+         {\printnames[labelname][-\value{listtotal}]{labelname}}
+    % Cite using short author
+         {\cbx@apa@ifnamesaved
+           {\printnames{shortauthor}}
+           {\printnames[labelname][-\value{listtotal}]{author}}}%
+    % Year
+        \setunit{\ifbool{cbx:np}
+                  {\printdelim{nameyeardelim}}
+                  {\global\booltrue{cbx:parens}\addspace\bibopenparen}}%
+    % Put the shortauthor inside the year brackets if necessary
+        \ifnameundef{shortauthor}
+         {}
+         {\cbx@apa@ifnamesaved
+           {}
+           {\printnames{shortauthor}\setunit{\printdelim{nameyeardelim}}}}%
+    % Actual year printing
+        \ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
+          {\usebibmacro{cite:ibid}}
+          {\usebibmacro{cite:plabelyear+extradate}}%
+    % Save name hash for checks later
+        \savefield{fullhash}{\cbx@lasthash}}}}
+\makeatother
+
+%% Bibliographie einbinden
+\addbibresource{references.bib} % your bib file
+\addbibresource{biblatex-examples.bib} % TODO: remove sample bib 
+
 
 %% ++++++++++++++++++++++++++++++++++++++++++
 %% Dokument
 %% ++++++++++++++++++++++++++++++++++++++++++
 \begin{document}
-\pagenumbering{Roman} % Uppercase Roman numerals
+
+% \pagenumbering{Roman} % Uppercase Roman numerals
+\pagenumbering{gobble} % switch off page numbering
 \include{pages/cover} % Titelblatt
 \blankpage
 
@@ -73,17 +182,21 @@
 \blankpage
 \listoffigures % Abbildungsverzeichnis
 \addcontentsline{toc}{section}{Abbildungsverzeichnis}
-\blankpage
-\listoftables % Tabellenverzeichnis
-\addcontentsline{toc}{section}{Tabellenverzeichnis}
+
+% TODO: Check if needed
+%\blankpage
+%\listoftables % Tabellenverzeichnis
+%\addcontentsline{toc}{section}{Tabellenverzeichnis} 
+
 \blankpage
 \section*{Abkürzungsverzeichnis}
 \addcontentsline{toc}{section}{Abkürzungsverzeichnis}
 
+% TODO: Check acronyms!
 \begin{acronym}
-\acro{lcnc}[LCNC]{Low-Code/No-Code}
+\acro{iu}[IU]{IU Internationale Hochschule}
 \end{acronym}
-\label{last-roman-page}% Save last page of this chapter
+%\label{last-roman-page}% Save last page of this chapter
 
 %% ++++++++++++++++++++++++++++++++++++++++++
 %% Hauptteil
@@ -91,25 +204,16 @@
 \blankpage
 \pagenumbering{arabic}
 \include{chapters/einleitung} % Einleitung
-\include{chapters/hauptteil}  % Grundlagen
-%\include{chapters/analyse}     % Analyse
-%\include{chapters/entwurf}     % Entwurf
-%\include{chapters/implementierung}    % Implementierung
-%\include{chapters/evaluation}        % Evaluierung
-%\include{chapters/zusammenfassung}   % Zusammenfassung und Ausblick
+\include{chapters/hauptteil}  % Hauptteil
+\include{chapters/schluss}  % Schluss
 
-\label{last-arabic-page}% Save last page of this chapter
+\pagenumbering{gobble} % switch off page numbering
+%\label{last-arabic-page}% Save last page of this chapter
 
 %% ++++++++++++++++++++++++++++++++++++++++++
 %% Literatur
 %% ++++++++++++++++++++++++++++++++++++++++++
 \blankpage
-
-%% Continue page numbering from last roman page
-\renewcommand{\thepage}{\roman{page}}% Switch to roman numbering
-\edef\intpagevalue{\getpagerefnumber{last-roman-page}}% Retrieve last roman page & convert to arabic
-\setcounter{page}{\number\numexpr\expandafter\arabicnumeral\expandafter{\intpagevalue}+1}% Set current page value
-\renewcommand{\thepage}{\Roman{page}}% Switch back to arabic numbering
 
 \phantomsection
 % set bibliography name
@@ -118,7 +222,7 @@
 % \nocite{*} % nur angeben, wenn auch nicht im Text zitierte Quellen 
 
 \begin{flushleft}
-% print bibliography
+
 \printbibliography[title=\bibname]
 \end{flushleft}
 
@@ -126,15 +230,8 @@
 %% Anhang
 %% ++++++++++++++++++++++++++++++++++++++++++
 \blankpage
-
-%% Continue page numbering from last arabic page
-\renewcommand{\thepage}{\arabic{page}}% Switch to roman numbering
-\edef\intpagevalue{\getpagerefnumber{last-arabic-page}}% Retrieve last roman page & convert to arabic
-\setcounter{page}{\number\numexpr\expandafter\arabicnumeral\expandafter{\intpagevalue}+1}% Set current page value
-\renewcommand{\thepage}{\arabic{page}}% Switch back to arabic numbering
-
 \appendix
-%\include{pages/appendix} % Anhang
+\include{pages/appendix} % Anhang % TODO: Add Appendix?
 
 \end{document}
 
