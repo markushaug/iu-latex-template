@@ -74,6 +74,23 @@
   \renewcommand*{\finalandcomma}{}%
 }
 
+
+%%
+%% Bibliographie & Sondereinstellungen
+%%
+\usepackage[babel]{csquotes}
+\usepackage[backend=biber, style=apa, pagetracker, ibidtracker=constrict, apamaxprtauth=20 ]{biblatex}
+
+% Remove Comma after second to last author and ampersand
+% https://tex.stackexchange.com/questions/670888/biblatex-apa-7-modification
+\makeatletter
+\renewcommand*{\apablx@ifrevnameappcomma}{\@secondoftwo}
+\makeatother
+
+\DefineBibliographyExtras{ngerman}{%
+  \renewcommand*{\finalandcomma}{}%
+}
+
 %% Verwendung von "ebenda (ebd.)", wenn eine Quelle hintereinander zitiert wird. 
 %% Dies ist nicht im Standard von APA definiert und muss somit explizit aktiviert werden.
 %% https://tex.stackexchange.com/questions/449249/getting-ibid-for-apa-style-citations-from-biblatex
@@ -87,77 +104,83 @@
 \renewbibmacro*{cite}{%
   \ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
     {\usebibmacro{cite:ibid}}
-    {\iffieldequals{fullhash}{\cbx@lasthash}
-     % Multiple cites in one command
+    {\iffieldequals{namehash}{\cbx@lasthash}
+   % Multiple cites in one command
       {\setunit{\compcitedelim}%
        \usebibmacro{cite:plabelyear+extradate}}%
-     % Single cite
-      {\ifthenelse{\ifnameundef{labelname}\OR\iffieldequalstr{entrytype}{patent}}
-     % No author/editor
-         {\usebibmacro{cite:noname}%
+   % Single cite
+      {\ifnameundef{labelname}
+   % No author/editor
+        {\usebibmacro{cite:noname}%
           \setunit{\printdelim{nameyeardelim}}%
           \usebibmacro{cite:plabelyear+extradate}%
-          \savefield{fullhash}{\cbx@lasthash}}
-     % Normal cite
+          \savefield{namehash}{\cbx@lasthash}}
+   % Normal cite
         {\ifnameundef{shortauthor}
-           {\printnames[labelname][-\value{listtotal}]{labelname}}%
-           {\cbx@apa@ifnamesaved
-             {\printnames{shortauthor}}
-             {\printnames[labelname][-\value{listtotal}]{author}%
-              \addspace\printnames[sabrackets]{shortauthor}}}%
-         \setunit{\printdelim{nameyeardelim}}%
+          {\printnames{labelname}}%
+          {\cbx@apa@ifnamesaved
+            {\printnames{shortauthor}}
+            {\printnames[labelname]{author}%
+             \addspace\printnames[sabrackets]{shortauthor}}}%
+          \setunit{\printdelim{nameyeardelim}}%
          \usebibmacro{cite:plabelyear+extradate}%
-         \savefield{fullhash}{\cbx@lasthash}}}}%
+         \savefield{namehash}{\cbx@lasthash}}}}%
    \setunit{\multicitedelim}}
 
 \renewbibmacro*{textcite}{%
-  \iffieldequals{fullhash}{\cbx@lasthash}
-   % Compact cite - more than one thing for same author
+  \iffieldequals{namehash}{\cbx@lasthash}
+% Compact cite - more than one thing for same author
     {\setunit{\compcitedelim}%
      \usebibmacro{cite:plabelyear+extradate}}
-   % New cite
-    {%
-    \ifbool{cbx:parens}
-      {\bibcloseparen\global\boolfalse{cbx:parens}}
-      {}%
-      \setunit{\compcitedelim}%
-      \ifthenelse{\ifnameundef{labelname}\OR\iffieldequalstr{entrytype}{patent}}
-    % No author/editor or patent
+% New cite
+    {\ifbool{cbx:parens}
+       {\bibcloseparen\global\boolfalse{cbx:parens}}
+       {}%
+     \setunit{\textcitedelim}%
+     \ifnameundef{labelname}
+     % No author/editor
        {\iffieldundef{shorthand}%
     % Cite using title
          {\usebibmacro{cite:noname}%
-          \setunit{\ifbool{cbx:np}%
-                   {\printdelim{nameyeardelim}}%
-                   {\global\booltrue{cbx:parens}\addspace\bibopenparen}}%
+          \setunit{\global\booltrue{cbx:parens}%
+                   \printdelim{nonameyeardelim}%
+                   \bibopenparen}%
           \usebibmacro{cite:plabelyear+extradate}}
     % Cite using shorthand
          {\usebibmacro{cite:shorthand}}}
-    % Normal cite with author/editor
-    % Normal full cite
+  % Normal cite with author/editor
+  % Normal full cite
        {\ifnameundef{shortauthor}%
     % Normal full cite
-         {\printnames[labelname][-\value{listtotal}]{labelname}}
+         {\printnames{labelname}}
     % Cite using short author
          {\cbx@apa@ifnamesaved
            {\printnames{shortauthor}}
-           {\printnames[labelname][-\value{listtotal}]{author}}}%
-    % Year
-        \setunit{\ifbool{cbx:np}
-                  {\printdelim{nameyeardelim}}
-                  {\global\booltrue{cbx:parens}\addspace\bibopenparen}}%
-    % Put the shortauthor inside the year brackets if necessary
+           {\printnames[labelname]{author}}}%
+  % Year
+        \setunit{\global\booltrue{cbx:parens}%
+                 \printdelim{nameyeardelim}%
+                 \bibopenparen}%
+  % Put the shortauthor inside the year brackets if necessary
         \ifnameundef{shortauthor}
          {}
          {\cbx@apa@ifnamesaved
            {}
-           {\printnames{shortauthor}\setunit{\printdelim{nameyeardelim}}}}%
-    % Actual year printing
+           {\printnames{shortauthor}%
+            \setunit{\printdelim{innernameyeardelim}}}}%
+  % Print prenote (belongs to first cite)
+        \ifnumequal{\value{citecount}}{1}
+           {\usebibmacro{prenote}}
+           {}%
+  % Actual year printing
         \ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
           {\usebibmacro{cite:ibid}}
           {\usebibmacro{cite:plabelyear+extradate}}%
-    % Save name hash for checks later
-        \savefield{fullhash}{\cbx@lasthash}}}}
+  % Save name hash for checks later
+        \savefield{namehash}{\cbx@lasthash}}%
+    \stepcounter{textcitecount}}}
 \makeatother
+
 
 %% Bibliographie einbinden
 \addbibresource{references.bib} % your bib file
