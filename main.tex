@@ -61,23 +61,6 @@
 %%
 %% Bibliographie & Sondereinstellungen
 %%
-\usepackage[autostyle]{csquotes}
-\usepackage[backend=biber, style=apa, pagetracker, ibidtracker=constrict]{biblatex}
-
-% Remove Comma after second to last author and ampersand
-% https://tex.stackexchange.com/questions/670888/biblatex-apa-7-modification
-\makeatletter
-\renewcommand*{\apablx@ifrevnameappcomma}{\@secondoftwo}
-\makeatother
-
-\DefineBibliographyExtras{ngerman}{%
-  \renewcommand*{\finalandcomma}{}%
-}
-
-
-%%
-%% Bibliographie & Sondereinstellungen
-%%
 \usepackage[babel]{csquotes}
 \usepackage[backend=biber, style=apa, pagetracker, ibidtracker=constrict, apamaxprtauth=20 ]{biblatex}
 
