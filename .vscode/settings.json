@@ -1,5 +1,6 @@
 {
     "latex-workshop.latex.autoClean.run": "onBuilt",
     "zotero.latexCommand": "cite",
-    "zotero.minimizeAfterPicking": true
+    "zotero.minimizeAfterPicking": true,
+    "editor.formatOnSave": false
 }
