@@ -176,19 +176,24 @@
 %% ++++++++++++++++++++++++++++++++++++++++++
 \begin{document}
 
-% \pagenumbering{Roman} % Uppercase Roman numerals
-\pagenumbering{gobble} % switch off page numbering
+\pagenumbering{Roman} % Uppercase Roman numerals
+% \pagenumbering{gobble} % switch off page numbering
 \include{pages/cover} % Titelblatt
-\blankpage
 
+\newpage
 %% ++++++++++++++++++++++++++++++++++++++++++
 %% Verzeichnisse
 %% ++++++++++++++++++++++++++++++++++++++++++
+\stepcounter{page}
 \setcounter{tocdepth}{3}
 \tableofcontents % Inhaltsverzeichnis
+
 \blankpage
-\listoffigures % Abbildungsverzeichnis
+\phantomsection
 \addcontentsline{toc}{section}{Abbildungsverzeichnis}
+\listoffigures % Abbildungsverzeichnis
+
+
 
 % TODO: Check if needed
 %\blankpage
@@ -214,15 +219,14 @@
 \include{chapters/hauptteil}  % Hauptteil
 \include{chapters/schluss}  % Schluss
 
-\pagenumbering{gobble} % switch off page numbering
-%\label{last-arabic-page}% Save last page of this chapter
-
 %% ++++++++++++++++++++++++++++++++++++++++++
 %% Literatur
 %% ++++++++++++++++++++++++++++++++++++++++++
 \blankpage
 
 \phantomsection
+\pagenumbering{Roman} % Uppercase Roman numerals
+\setcounter{page}{5}
 % set bibliography name
 \renewcommand{\bibname}{Literaturverzeichnis}
 \addcontentsline{toc}{section}{\bibname}
@@ -233,12 +237,12 @@
 \printbibliography[title=\bibname]
 \end{flushleft}
 
-%% ++++++++++++++++++++++++++++++++++++++++++
-%% Anhang
-%% ++++++++++++++++++++++++++++++++++++++++++
-\blankpage
-\appendix
-\include{pages/appendix} % Anhang % TODO: Add Appendix?
+% %% ++++++++++++++++++++++++++++++++++++++++++
+% %% Anhang
+% %% ++++++++++++++++++++++++++++++++++++++++++
+% \blankpage
+% \appendix
+% \include{pages/appendix} % Anhang % TODO: Add Appendix?
 
 \end{document}
 
