@@ -5,40 +5,37 @@
   "editor.formatOnSave": false,
   "latex-workshop.latex.autoBuild.run": "onSave",
   "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.latex.autoClean.run": "never",
   "latex-workshop.latex.tools": [
     {
       "name": "lualatex",
       "command": "lualatex",
       "args": [
-        "-output-directory=%OUTDIR%",
-        "%DOC%"
+        "main.tex",
+        "-shell-escape",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-output-directory=%DIR%",
+        
       ],
       "env": {}
     },
     {
       "name": "biber",
       "command": "biber",
-      "args": [
-          "main"
-      ],
+      "args": ["main"],
       "env": {}
-      }
+    }
   ],
   "latex-workshop.latex.recipes": [
     {
-        "name": "lualatex",
-        "tools": [
-            "lualatex"
-        ]
+      "name": "lualatex",
+      "tools": ["lualatex"]
     },
 
     {
-        "name": "lualatex -> biber -> lualatex TWICE",
-        "tools": [
-            "lualatex",
-            "biber",
-            "lualatex"
-        ]
-    }        
-],
+      "name": "lualatex -> biber -> lualatex TWICE",
+      "tools": ["lualatex", "biber", "lualatex"]
+    }
+  ]
 }
