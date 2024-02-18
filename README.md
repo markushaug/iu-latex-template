@@ -12,18 +12,20 @@ Um dieses Template zu verwenden, klone oder lade einfach dieses Repository herun
 
 Bitte beachte, dass die Verwendung von LuaHBTeX, Version 1.15.0 (TeX Live 2022) erforderlich ist. Falls du Overleaf verwenden solltest, kannst du dies recht einfach in den Einstellungen der jeweiligen Arbeit ändern, lokal musst du es entsprechend konfigurieren.
 
+Alternativ kannst du die Repository in Visual Studio Code öffnen und die LaTeX Workshop Extension verwenden, um die PDF zu generieren. Durch einen Devcontainer wird die benötigte TeX Live Version automatisch heruntergeladen und installiert. Alle weiteren benötigten Pakete werden ebenfalls automatisch installiert.
+
 ### Befehle
 
 Um die PDF zu generieren führe folgenden Befehl aus:
 
-```
-lualatex main
+```shell
+$ lualatex main
 ```
 
 Im Falle von Änderungen an der `.bib` Datei muss folgender Befehl ausgeführt werden, um die Referenzen zu aktualisieren:
 
-```
-biber main
+```shell
+$ biber main
 ```
 
 ## License

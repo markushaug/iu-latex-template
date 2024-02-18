@@ -1,0 +1,97 @@
+{
+    "name": "iu-wissdoc-template",
+    "dockerComposeFile": [
+        "docker-compose.yml"
+    ],
+    "service": "vscode",
+    "runServices": [
+        "vscode"
+    ],
+    "shutdownAction": "stopCompose",
+    "updateContentCommand": "tlmgr update --self; tlmgr update --all",
+    "workspaceFolder": "/workspace",
+    "postCreateCommand": "",
+    "features": {
+        "ghcr.io/devcontainers/features/sshd:1": {
+            "version": "latest"
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "james-yu.latex-workshop",
+                // Git
+                "eamodio.gitlens",
+                // Other helpers
+                "shardulm94.trailing-spaces",
+                "stkb.rewrap", // rewrap comments after n characters on one line
+                // Other
+                "vscode-icons-team.vscode-icons"
+            ],
+            "settings": {
+                // General settings
+                "files.eol": "\n",
+                "editor.formatOnSave": true,
+                // Latex settings
+                "latex-workshop.linting.chktex.enabled": true,
+                "latex-workshop.linting.chktex.exec.path": "chktex",
+                "latex-workshop.latex.clean.subfolder.enabled": true,
+                "latex-workshop.latex.autoClean.run": "onBuilt",
+                "latex-workshop.latex.autoBuild.run": "onSave",
+                "latex-workshop.linting.chktex.convertOutput.column.chktexrcTabSize": 4,
+                "files.associations": {
+                    "*.tex": "latex"
+                },
+                "latex-workshop.latexindent.path": "latexindent",
+                "latex-workshop.latexindent.args": [
+                    "-c",
+                    "%DIR%/",
+                    "%TMPFILE%",
+                    "-y=defaultIndent: '%INDENT%'"
+                ],
+                "latex-workshop.view.pdf.viewer": "tab",
+                "latex-workshop.latex.tools": [
+                    {
+                        "name": "lualatex",
+                        "command": "lualatex",
+                        "args": [
+                            "main.tex",
+                            "-shell-escape",
+                            "-interaction=nonstopmode",
+                            "-file-line-error",
+                            "-output-directory=%DIR%",
+                        ],
+                        "env": {}
+                    },
+                    {
+                        "name": "biber",
+                        "command": "biber",
+                        "args": [
+                            "main"
+                        ],
+                        "env": {}
+                    }
+                ],
+                "latex-workshop.latex.recipes": [
+                    {
+                        "name": "lualatex",
+                        "tools": [
+                            "lualatex"
+                        ]
+                    },
+                    {
+                        "name": "lualatex -> biber -> lualatex TWICE",
+                        "tools": [
+                            "lualatex",
+                            "biber",
+                            "lualatex"
+                        ]
+                    }
+                ],
+                // Zotero settings
+                "zotero.latexCommand": "cite",
+                "zotero.minimizeAfterPicking": true
+            }
+        }
+    }
+}
