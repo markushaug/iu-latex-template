@@ -1,33 +1,33 @@
-# LaTeX Template für wissenschaftliche Arbeiten an der IU International University
+# LaTeX template for academic papers at IU International University
 
-Dieses Repository enthält eine LaTeX-Vorlage für wissenschaftliche Arbeiten an der IU International University. Die Vorlage ist auf die Anforderungen der IU International University zugeschnitten und berücksichtigt alle mir bekannten Formalien, die für die Abgabe von wissenschaftlichen Arbeiten an der IU International University gelten.
+This repository contains a LaTeX template for academic papers at [IU International University](https://www.iu.de/). The template is tailored to the requirements of IU International University and takes into account all formalities known to me that apply to the submission of academic papers at IU International University.
 
-## Haftungsausschluss
+## Disclaimer
 
-Dieses Template wird ohne Garantie oder Gewährleistung bereitgestellt. Der Autor übernimmt keine Verantwortung für die Richtigkeit oder Zuverlässigkeit der in diesem Template enthaltenen Informationen oder für die Folgen ihrer Verwendung. Bitte verwenden Sie es auf eigene Gefahr und Verantwortung.
+This template is provided without guarantee or warranty. The author assumes no responsibility for the accuracy or reliability of the information contained in this template or for the consequences of its use. Please use it at your own risk and responsibility.
 
-## Verwendung
+## Usage
 
-Um dieses Template zu verwenden, klone oder lade einfach dieses Repository herunter und beginne mit dem Schreiben deiner wissenschaftlichen Arbeit. Bitte stelle sicher, dass du die ursprünglichen Credits im Quellcode beibehältst. Keine Sorge, dies wird in keiner deiner Abgaben ersichtlich sein :).
+To use this template, simply clone or download this repository and start writing your scientific paper. Please make sure you keep the original credits in the source code. Don't worry, this will not be visible in any of your submissions :).
 
-Bitte beachte, dass die Verwendung von LuaHBTeX, Version 1.15.0 (TeX Live 2022) erforderlich ist. Falls du Overleaf verwenden solltest, kannst du dies recht einfach in den Einstellungen der jeweiligen Arbeit ändern, lokal musst du es entsprechend konfigurieren.
+Please note that the use of LuaHBTeX, version 1.15.0 (TeX Live 2022) is required. If you use Overleaf, you can easily change this in the settings of the respective work, locally you have to configure it accordingly.
 
-Alternativ kannst du die Repository in Visual Studio Code öffnen und die LaTeX Workshop Extension verwenden, um die PDF zu generieren. Durch einen Devcontainer wird die benötigte TeX Live Version automatisch heruntergeladen und installiert. Alle weiteren benötigten Pakete werden ebenfalls automatisch installiert.
+Alternatively, you can open the repository in Visual Studio Code and use the LaTeX Workshop Extension to generate the PDF. A devcontainer automatically downloads and installs the required TeX Live version. All other required packages are also installed automatically.
 
-### Befehle
+### Commands
 
-Um die PDF zu generieren führe folgenden Befehl aus:
+To generate the PDF, execute the following command:
 
 ```shell
 $ lualatex main
 ```
 
-Im Falle von Änderungen an der `.bib` Datei muss folgender Befehl ausgeführt werden, um die Referenzen zu aktualisieren:
+In case of changes to the `.bib` file, the following command must be executed to update the references:
 
 ```shell
 $ biber main
 ```
 
-## License
+## Licence
 
-This template is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+This template is licensed under the MIT Licence. See the [LICENSE](LICENSE) file for more information.
