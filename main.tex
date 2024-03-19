@@ -6,7 +6,7 @@
 \documentclass{article}[11pt, a4paper, oneside, ngerman]
 
 
-%% 
+%%
 %% Pakete & Formalia
 %%
 \usepackage[ngerman]{babel} % neue deutsche Trennungsregeln, etc
@@ -41,8 +41,8 @@
 }
 
 % Grafiken einbinden
-\usepackage{graphicx}      
-% center images and tables 
+\usepackage{graphicx}
+% center images and tables
 \makeatletter
 \g@addto@macro\@floatboxreset\centering
 \makeatother
@@ -65,7 +65,34 @@
 \usepackage[babel]{csquotes}
 \usepackage[backend=biber, style=apa, pagetracker, ibidtracker=constrict, apamaxprtauth=20 ]{biblatex}
 
-% Remove Comma after second to last author and ampersand
+%%
+%% Source Code Setup
+%%
+\usepackage{listings}
+\usepackage{color}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+
+% TODO Remove Comma after second to last author and ampersand
 % https://tex.stackexchange.com/questions/670888/biblatex-apa-7-modification
 \makeatletter
 \renewcommand*{\apablx@ifrevnameappcomma}{\@secondoftwo}
@@ -75,7 +102,7 @@
   \renewcommand*{\finalandcomma}{}%
 }
 
-%% Verwendung von "ebenda (ebd.)", wenn eine Quelle hintereinander zitiert wird. 
+%% Verwendung von "ebenda (ebd.)", wenn eine Quelle hintereinander zitiert wird.
 %% Dies ist nicht im Standard von APA definiert und muss somit explizit aktiviert werden.
 %% https://tex.stackexchange.com/questions/449249/getting-ibid-for-apa-style-citations-from-biblatex
 
@@ -198,7 +225,7 @@
 % TODO: Check if needed
 %\blankpage
 %\listoftables % Tabellenverzeichnis
-%\addcontentsline{toc}{section}{Tabellenverzeichnis} 
+%\addcontentsline{toc}{section}{Tabellenverzeichnis}
 
 \blankpage
 \section*{Abkürzungsverzeichnis}
@@ -206,6 +233,7 @@
 
 % TODO: Check acronyms!
 \begin{acronym}
+
 \acro{iu}[IU]{IU Internationale Hochschule}
 \end{acronym}
 %\label{last-roman-page}% Save last page of this chapter
