@@ -28,6 +28,10 @@ In case of changes to the `.bib` file, the following command must be executed to
 $ biber main
 ```
 
+### Contributions
+
+Contribution to this template is highly welcome. Please open a pull-request with your proposed changes and do not forget to assign me, so that I get notified. 
+
 ## Licence
 
 This template is licensed under the MIT Licence. See the [LICENSE](LICENSE) file for more information.
