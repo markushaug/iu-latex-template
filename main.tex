@@ -12,7 +12,7 @@
 \usepackage[hidelinks]{hyperref} % Hyperlinks ohne Umrandungen
 \usepackage{setspace} % Abstände zwischen Absätzen
 \usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry} % Seitenränder
-\onehalfspacing % 1,5 Zeilenabstand
+\setstretch{1.5} % 1,5 Zeilenabstand
 \usepackage{lipsum}  % Dummy-Texte
 \usepackage{titlesec} % define size for section headings
 \usepackage[nohyperlinks, printonlyused]{acronym} % Abkürzungen
@@ -194,7 +194,6 @@
 
 %% Bibliographie einbinden
 \addbibresource{references.bib} % your bib file
-\addbibresource{biblatex-examples.bib} % TODO: remove sample bib 
 
 
 %% ++++++++++++++++++++++++++++++++++++++++++
@@ -252,8 +251,6 @@
 \blankpage
 
 \phantomsection
-\pagenumbering{Roman} % Uppercase Roman numerals
-\setcounter{page}{5}
 % set bibliography name
 \renewcommand{\bibname}{Literaturverzeichnis}
 \addcontentsline{toc}{section}{\bibname}
