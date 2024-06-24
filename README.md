@@ -6,9 +6,11 @@ This repository contains a LaTeX template for academic papers at [IU Internation
 
 This template is provided without guarantee or warranty. The author assumes no responsibility for the accuracy or reliability of the information contained in this template or for the consequences of its use. Please use it at your own risk and responsibility.
 
+**Note**: This is an open source project created by IU International University students. There is no official affiliation with or endorsement by IU International University.
+
 ## Usage
 
-To use this template, simply clone or download this repository and start writing your scientific paper. Please make sure you keep the original credits in the source code. Don't worry, this will not be visible in any of your submissions :).
+To use this template, simply clone or download this repository and start writing your scientific paper. Please make sure you keep the original credits in the source code. Don't worry, this will not be visible in any of your submissions.
 
 Please note that the use of LuaHBTeX, version 1.15.0 (TeX Live 2022) is required. If you use Overleaf, you can easily change this in the settings of the respective work, locally you have to configure it accordingly.
 
