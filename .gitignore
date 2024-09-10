@@ -10,3 +10,6 @@
 **.log
 **.toc
 **.xml
+.vscode
+**.fls
+**.fdb_latexmk

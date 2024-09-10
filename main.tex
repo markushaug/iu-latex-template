@@ -62,7 +62,7 @@
 %% Bibliographie & Sondereinstellungen
 %%
 \usepackage[babel]{csquotes}
-\usepackage[backend=biber, style=apa, pagetracker, ibidtracker=constrict, apamaxprtauth=20 ]{biblatex}
+\usepackage[backend=biber, style=apa, pagetracker, apamaxprtauth=20 ]{biblatex}
 
 %%
 %% Source Code Setup
@@ -100,96 +100,6 @@
 \DefineBibliographyExtras{ngerman}{%
   \renewcommand*{\finalandcomma}{}%
 }
-
-%% Verwendung von "ebenda (ebd.)", wenn eine Quelle hintereinander zitiert wird.
-%% Dies ist nicht im Standard von APA definiert und muss somit explizit aktiviert werden.
-%% https://tex.stackexchange.com/questions/449249/getting-ibid-for-apa-style-citations-from-biblatex
-
-\makeatletter
-\providecommand*{\mkibid}[1]{#1}
-
-\newbibmacro*{cite:ibid}{%
-  \printtext[bibhyperref]{\bibstring[\mkibid]{ibidem}}}
-
-\renewbibmacro*{cite}{%
-  \ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
-    {\usebibmacro{cite:ibid}}
-    {\iffieldequals{namehash}{\cbx@lasthash}
-   % Multiple cites in one command
-      {\setunit{\compcitedelim}%
-       \usebibmacro{cite:plabelyear+extradate}}%
-   % Single cite
-      {\ifnameundef{labelname}
-   % No author/editor
-        {\usebibmacro{cite:noname}%
-          \setunit{\printdelim{nameyeardelim}}%
-          \usebibmacro{cite:plabelyear+extradate}%
-          \savefield{namehash}{\cbx@lasthash}}
-   % Normal cite
-        {\ifnameundef{shortauthor}
-          {\printnames{labelname}}%
-          {\cbx@apa@ifnamesaved
-            {\printnames{shortauthor}}
-            {\printnames[labelname]{author}%
-             \addspace\printnames[sabrackets]{shortauthor}}}%
-          \setunit{\printdelim{nameyeardelim}}%
-         \usebibmacro{cite:plabelyear+extradate}%
-         \savefield{namehash}{\cbx@lasthash}}}}%
-   \setunit{\multicitedelim}}
-
-\renewbibmacro*{textcite}{%
-  \iffieldequals{namehash}{\cbx@lasthash}
-% Compact cite - more than one thing for same author
-    {\setunit{\compcitedelim}%
-     \usebibmacro{cite:plabelyear+extradate}}
-% New cite
-    {\ifbool{cbx:parens}
-       {\bibcloseparen\global\boolfalse{cbx:parens}}
-       {}%
-     \setunit{\textcitedelim}%
-     \ifnameundef{labelname}
-     % No author/editor
-       {\iffieldundef{shorthand}%
-    % Cite using title
-         {\usebibmacro{cite:noname}%
-          \setunit{\global\booltrue{cbx:parens}%
-                   \printdelim{nonameyeardelim}%
-                   \bibopenparen}%
-          \usebibmacro{cite:plabelyear+extradate}}
-    % Cite using shorthand
-         {\usebibmacro{cite:shorthand}}}
-  % Normal cite with author/editor
-  % Normal full cite
-       {\ifnameundef{shortauthor}%
-    % Normal full cite
-         {\printnames{labelname}}
-    % Cite using short author
-         {\cbx@apa@ifnamesaved
-           {\printnames{shortauthor}}
-           {\printnames[labelname]{author}}}%
-  % Year
-        \setunit{\global\booltrue{cbx:parens}%
-                 \printdelim{nameyeardelim}%
-                 \bibopenparen}%
-  % Put the shortauthor inside the year brackets if necessary
-        \ifnameundef{shortauthor}
-         {}
-         {\cbx@apa@ifnamesaved
-           {}
-           {\printnames{shortauthor}%
-            \setunit{\printdelim{innernameyeardelim}}}}%
-  % Print prenote (belongs to first cite)
-        \ifnumequal{\value{citecount}}{1}
-           {\usebibmacro{prenote}}
-           {}%
-  % Actual year printing
-        \ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
-          {\usebibmacro{cite:ibid}}
-          {\usebibmacro{cite:plabelyear+extradate}}%
-  % Save name hash for checks later
-        \savefield{namehash}{\cbx@lasthash}}%
-    \stepcounter{textcitecount}}}
-\makeatother
 
 
 %% Bibliographie einbinden
