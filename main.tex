@@ -2,44 +2,44 @@
 % Credits: Markus Haug and the template contributors.
 % Feel free to share and modify this template, but please give credit where it's due.
 
-\documentclass[11pt, a4paper, oneside, ngerman]{article}
+\documentclass[11pt, a4paper, oneside, english]{article}
 
 
 %%
-%% Pakete & Formalia
+%% Packages & Formatting
 %%
-\usepackage[ngerman]{babel} % neue deutsche Trennungsregeln, etc
-\usepackage[hidelinks]{hyperref} % Hyperlinks ohne Umrandungen
-\usepackage{setspace} % Abstände zwischen Absätzen
-\usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry} % Seitenränder
-\setstretch{1.5} % 1,5 Zeilenabstand
-\usepackage{lipsum}  % Dummy-Texte
+\usepackage[english]{babel} % English language settings
+\usepackage[hidelinks]{hyperref} % Hyperlinks without borders
+\usepackage{setspace} % Spacing between paragraphs
+\usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry} % Page margins
+\setstretch{1.5} % 1.5 line spacing
+\usepackage{lipsum}  % Dummy text
 \usepackage{titlesec} % define size for section headings
-\usepackage[nohyperlinks, printonlyused]{acronym} % Abkürzungen
-\usepackage[utf8]{inputenc} % korrekte Darstellung von Umlauten
+\usepackage[nohyperlinks, printonlyused]{acronym} % Acronyms
+\usepackage[utf8]{inputenc} % Correct display of special characters
 \usepackage[T1]{fontenc} % enable hyphenation for languages with accented characters
 
-%% Schriftarten und -größen
+%% Fonts and Sizes
 \usepackage{fontspec}
-\setmainfont{Arial} % Hauptfont Arial (lualatex oder xelatex benötigt)
-\titleformat{\section}{\normalfont\fontsize{12pt}{1.5}\bfseries}{\thesection}{1em}{} % Überschriften 1pt größer
-\titleformat{\subsection}{\normalfont\fontsize{12pt}{1.5}\bfseries}{\thesubsection}{1em}{} % Überschriften 1pt größer
-\titleformat{\subsubsection}{\normalfont\fontsize{12pt}{1.5}\bfseries}{\thesubsubsection}{1em}{} % Überschriften 1pt größer
+\setmainfont{Arial} % Main font Arial (requires lualatex or xelatex)
+\titleformat{\section}{\normalfont\fontsize{12pt}{1.5}\bfseries}{\thesection}{1em}{} % Section headings 1pt larger
+\titleformat{\subsection}{\normalfont\fontsize{12pt}{1.5}\bfseries}{\thesubsection}{1em}{} % Subsection headings 1pt larger
+\titleformat{\subsubsection}{\normalfont\fontsize{12pt}{1.5}\bfseries}{\thesubsubsection}{1em}{} % Subsubsection headings 1pt larger
 \def\UrlFont{\rm} % Print URLs not in Typewriter Font
 \renewcommand{\footnotesize}{\fontsize{10pt}{1.5pt}\selectfont}
 
-% automatischens Einrücken von Absätzen verhindern
+% Prevent automatic paragraph indentation
 \usepackage{changepage}
 \setlength{\parindent}{0pt}
-% 6pt Abstand nur zwischen Absätzen
+% 6pt spacing only between paragraphs
 \setlength{\parskip}{6pt}{}
 
-% Leerseite ohne Seitennummer, nächste Seite rechts
+% Blank page without page number, next page right
 \newcommand{\blankpage}{
  \clearpage{\pagestyle{empty}\cleardoublepage}
 }
 
-% Grafiken einbinden
+% Include graphics
 \usepackage{graphicx}
 % center images and tables
 \makeatletter
@@ -47,19 +47,19 @@
 \makeatother
 
 
-%% Informationen für die PDF-Datei
+%% PDF Metadata
 % TODO: Update this!
 \hypersetup{
- pdfauthor={Dein Name},
- pdftitle={Mein Titel}, %% Titel der PDF-Datei
-  pdfsubject={Fallstudie - IU Wissdoc Template},
+ pdfauthor={Your Name},
+ pdftitle={My Title}, %% Title of the PDF file
+  pdfsubject={Case Study - IU LaTeX Template},
  pdfkeywords={},
  pdfcreator={lualatex},
  pdfproducer={lualatex - Template by Markus Haug},
 }
 
 %%
-%% Bibliographie & Sondereinstellungen
+%% Bibliography & Settings
 %%
 \usepackage[babel]{csquotes}
 \usepackage[backend=biber, style=apa, pagetracker, apamaxprtauth=20 ]{biblatex}
@@ -102,69 +102,69 @@
 }
 
 
-%% Bibliographie einbinden
+%% Include Bibliography
 \addbibresource{references.bib} % your bib file
 
 
 %% ++++++++++++++++++++++++++++++++++++++++++
-%% Dokument
+%% Document
 %% ++++++++++++++++++++++++++++++++++++++++++
 \begin{document}
 
 \pagenumbering{Roman} % Uppercase Roman numerals
 % \pagenumbering{gobble} % switch off page numbering
-\include{pages/cover} % Titelblatt
+\include{pages/cover} % Cover page
 
 \newpage
 %% ++++++++++++++++++++++++++++++++++++++++++
-%% Verzeichnisse
+%% Tables of Contents
 %% ++++++++++++++++++++++++++++++++++++++++++
 \stepcounter{page}
 \setcounter{tocdepth}{3}
-\tableofcontents % Inhaltsverzeichnis
+\tableofcontents % Table of contents
 
 \blankpage
 \phantomsection
-\addcontentsline{toc}{section}{Abbildungsverzeichnis}
-\listoffigures % Abbildungsverzeichnis
+\addcontentsline{toc}{section}{List of Figures}
+\listoffigures % List of Figures
 
 
 
 % TODO: Check if needed
 %\blankpage
-%\listoftables % Tabellenverzeichnis
-%\addcontentsline{toc}{section}{Tabellenverzeichnis}
+%\listoftables % List of Tables
+%\addcontentsline{toc}{section}{List of Tables}
 
 \blankpage
-\section*{Abkürzungsverzeichnis}
-\addcontentsline{toc}{section}{Abkürzungsverzeichnis}
+\section*{Acronyms}
+\addcontentsline{toc}{section}{Acronyms}
 
 % TODO: Check acronyms!
 \begin{acronym}
 
-\acro{iu}[IU]{IU Internationale Hochschule}
+\acro{iu}[IU]{IU International University}
 \end{acronym}
 %\label{last-roman-page}% Save last page of this chapter
 
 %% ++++++++++++++++++++++++++++++++++++++++++
-%% Hauptteil
+%% Main Part
 %% ++++++++++++++++++++++++++++++++++++++++++
 \blankpage
 \pagenumbering{arabic}
-\input{chapters/einleitung} % Einleitung
-\input{chapters/hauptteil}  % Hauptteil
-\input{chapters/schluss}  % Schluss
+\input{chapters/introduction} % Introduction
+\input{chapters/mainpart}  % Main Part
+\input{chapters/conclusion}  % Conclusion
 \pagebreak
 %% ++++++++++++++++++++++++++++++++++++++++++
-%% Literatur
+% References
 %% ++++++++++++++++++++++++++++++++++++++++++
 \blankpage
 
 \phantomsection
 % set bibliography name
-\renewcommand{\bibname}{Literaturverzeichnis}
+\renewcommand{\bibname}{References}
 \addcontentsline{toc}{section}{\bibname}
-% \nocite{*} % nur angeben, wenn auch nicht im Text zitierte Quellen 
+% \nocite{*} % only include if also citing sources not referenced in the text
 
 \begin{flushleft}
 
@@ -172,11 +172,11 @@
 \end{flushleft}
 
 % %% ++++++++++++++++++++++++++++++++++++++++++
-% %% Anhang
+% %% Appendix
 % %% ++++++++++++++++++++++++++++++++++++++++++
 % \blankpage
 % \appendix
-% \include{pages/appendix} % Anhang % TODO: Add Appendix?
+% \include{pages/appendix} % Appendix % TODO: Add Appendix?
 
 \end{document}
 
