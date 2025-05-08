@@ -1,0 +1,49 @@
+{
+    "zotero.latexCommand": "cite",
+    "zotero.minimizeAfterPicking": true,
+    "editor.formatOnSave": false,
+    "latex-workshop.latex.autoBuild.run": "onSave",
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.latex.autoClean.run": "never",
+    "latex-workshop.latex.tools": [
+      {
+        "name": "lualatex",
+        "command": "lualatex",
+        "args": [
+          "main.tex",
+          "-shell-escape",
+          "-interaction=nonstopmode",
+          "-file-line-error",
+          "-output-directory=%DIR%"
+        ],
+        "env": {}
+      },
+      {
+        "name": "biber",
+        "command": "biber",
+        "args": ["main"],
+        "env": {}
+      }
+    ],
+    "latex-workshop.latex.recipes": [
+      {
+        "name": "lualatex",
+        "tools": ["lualatex"]
+      },
+  
+      {
+        "name": "lualatex -> biber -> lualatex TWICE",
+        "tools": ["lualatex", "biber", "lualatex"]
+      }
+    ],
+    "latex-refs.customPatterns": [
+      "fig",
+      "abs"
+    ],
+    "todo-tree.tree.scanMode": "open files",
+  "editor.rulers": [
+    80, // 115
+],
+"editor.wordWrap": "wordWrapColumn",
+"editor.wordWrapColumn": 80,
+}
